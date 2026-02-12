@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MANUU'S BIRTHDAY GALAXY 👑</title>
+    <title>MANUU'S 18th BIRTHDAY 👑</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root { --gold: #ffcc33; --royal: #1a1a2e; --accent: #0f3460; --white: #ffffff; }
@@ -19,46 +19,46 @@
         .slide { 
             position: absolute; inset: 0; display: flex; flex-direction: column; 
             align-items: center; justify-content: center; text-align: center;
-            opacity: 0; visibility: hidden; transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0; visibility: hidden; transition: all 0.5s ease-in-out;
             z-index: 10; padding: 30px;
         }
         .slide.active { opacity: 1; visibility: visible; }
 
-        h1 { font-family: 'Playfair Display'; font-size: 2.8rem; line-height: 1.1; margin-bottom: 15px; color: var(--gold); text-shadow: 0 0 15px rgba(255,204,51,0.5); }
-        .big-emoji { font-size: 5rem; margin-bottom: 20px; filter: drop-shadow(0 0 10px white); }
+        h1 { font-family: 'Playfair Display'; font-size: 2.5rem; line-height: 1.1; margin-bottom: 15px; color: var(--gold); }
         
         .btn-gold { 
-            padding: 18px 45px; border-radius: 50px; border: none; 
+            padding: 18px 40px; border-radius: 50px; border: none; 
             background: linear-gradient(45deg, #bf953f, #fcf6ba, #b38728);
-            color: #000; font-weight: 800; cursor: pointer; 
-            box-shadow: 0 10px 30px rgba(255, 204, 51, 0.4); transition: 0.3s;
+            color: #000; font-weight: 800; cursor: pointer; margin-top: 20px;
         }
 
+        /* --- QUIZ & TRANSITIONS --- */
+        .quiz-btn { width: 100%; max-width: 300px; padding: 15px; margin: 10px; border-radius: 15px; border: 1px solid var(--gold); background: rgba(255,255,255,0.1); color: white; cursor: pointer; font-weight: 600; }
+        
+        .trans-msg { font-size: 3rem; font-weight: 800; color: var(--gold); }
+
         /* --- CAKE FIX --- */
-        .cake-wrapper { position: relative; font-size: 7rem; cursor: pointer; display: inline-block; margin-top: 20px; }
-        .flame { 
-            position: absolute; top: -5px; left: 42%; transform: translateX(-50%); 
-            font-size: 2.5rem; animation: flicker 0.1s infinite; z-index: 15;
-        }
-        @keyframes flicker { 0% { opacity: 0.8; transform: translateX(-50%) scale(1); } 50% { opacity: 1; transform: translateX(-52%) scale(1.1); } 100% { opacity: 0.9; transform: translateX(-48%) scale(0.9); } }
+        .cake-wrapper { position: relative; font-size: 7rem; cursor: pointer; margin-top: 20px; }
+        .flame { position: absolute; top: -5px; left: 42%; transform: translateX(-50%); font-size: 2.5rem; animation: flicker 0.1s infinite; }
+        @keyframes flicker { 0% { opacity: 0.8; transform: scale(1); } 50% { opacity: 1; transform: scale(1.1); } 100% { opacity: 0.9; transform: scale(0.9); } }
 
         /* --- AURA METER --- */
         #aura-btn { width: 100px; height: 100px; border-radius: 50%; background: var(--gold); border: none; font-weight: 800; cursor: pointer; box-shadow: 0 0 20px var(--gold); }
         .meter-container { width: 80%; height: 20px; background: #222; border-radius: 10px; margin-top: 30px; overflow: hidden; border: 1px solid var(--gold); }
-        #meter-fill { width: 0%; height: 100%; background: linear-gradient(90deg, #ffcc33, #ffffff); transition: 0.1s; }
+        #meter-fill { width: 0%; height: 100%; background: var(--gold); transition: 0.1s; }
 
-        /* --- EMOJI RAIN --- */
+        /* --- LETTER BOX --- */
+        .letter-content { 
+            background: rgba(255,255,255,0.05); padding: 25px; border-radius: 20px; 
+            line-height: 1.6; text-align: left; max-height: 60vh; overflow-y: auto; 
+            border-left: 4px solid var(--gold); font-size: 0.95rem; white-space: pre-wrap;
+        }
+
         .rain { position: fixed; top: -50px; font-size: 2rem; animation: fall 3s linear forwards; z-index: 1000; pointer-events: none; }
         @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
 
-        /* --- QUIZ --- */
-        .quiz-btn { width: 100%; max-width: 300px; padding: 15px; margin: 10px; border-radius: 15px; border: 1px solid var(--gold); background: rgba(255,255,255,0.1); color: white; cursor: pointer; }
-        .quiz-btn:active { background: var(--gold); color: black; }
-
         .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 10000; display: none; align-items: center; justify-content: center; padding: 30px; }
-        .popup { background: var(--royal); border: 2px solid var(--gold); padding: 30px; border-radius: 25px; text-align: center; width: 100%; box-shadow: 0 0 50px rgba(255,204,51,0.2); }
-
-        .nav-bar { position: fixed; bottom: 30px; display: none; gap: 20px; z-index: 500; }
+        .popup { background: var(--royal); border: 2px solid var(--gold); padding: 30px; border-radius: 25px; text-align: center; width: 100%; }
     </style>
 </head>
 <body>
@@ -66,64 +66,74 @@
 <canvas id="canvas-stars"></canvas>
 
 <div class="slide active" id="s0">
-    <span class="big-emoji">👽</span>
-    <h1>Happy Birthday<br>to the Alien Queen!</h1>
-    <p style="margin-bottom: 30px; opacity: 0.7;">System status: Ready for Manuu Day.</p>
-    <button class="btn-gold" onclick="next(1)">BOOT SYSTEM 🚀</button>
+    <h1 style="font-size: 4rem;">18</h1>
+    <p style="margin-bottom: 20px; font-weight: bold; color: var(--gold);">LEVEL UNLOCKED: ADULTHOOD 🔓</p>
+    <button class="btn-gold" onclick="next(1)">ENTER GALAXY 🚀</button>
 </div>
 
 <div class="slide" id="s1">
-    <span class="big-emoji">🧐</span>
-    <h1>Vibe Check!</h1>
-    <p style="margin-bottom: 20px;">To enter, answer this:</p>
-    <p>Who is the most dramatic person ever?</p>
-    <button class="quiz-btn" onclick="pop('WRONG ❌','Try again... hint: it rhymes with Tanu.')">Random Person</button>
-    <button class="quiz-btn" onclick="next(2)">Manuu (Obviously) 😼</button>
+    <h1>Question 1 🍕</h1>
+    <p style="margin-bottom: 20px;">What is your absolute favorite food?</p>
+    <button class="quiz-btn" onclick="quizTrans('hawww🙄🫢', 2)">Gol Gappe</button>
+    <button class="quiz-btn" onclick="pop('CHAL JUTHIII😏😏', 'Me > Gol Gappe. Accept it.')">The person making this project 😼</button>
+</div>
+
+<div class="slide" id="s1-t">
+    <div class="trans-msg" id="trans-text"></div>
 </div>
 
 <div class="slide" id="s2">
-    <h1>Make a Wish!</h1>
-    <p>Tap the flame to blow it!</p>
-    <div class="cake-wrapper" id="cakeGroup" onclick="blowCake()">
-        <span class="flame" id="flame">🔥</span>
-        <span id="cake-body">🎂</span>
-    </div>
+    <h1>Question 2 💼</h1>
+    <p style="margin-bottom: 20px;">What is your dream job?</p>
+    <button class="quiz-btn" onclick="quizTrans('YESSS😎', 3)">ISRO Employee 🚀</button>
+    <button class="quiz-btn" onclick="quizTrans('CHALL NIKAL 🙄', 2, true)">Tujhe 2nd option chaiyee??🙃</button>
 </div>
 
 <div class="slide" id="s3">
-    <h1>Calibrating Aura...</h1>
-    <p>Hold the button to measure energy!</p>
-    <button id="aura-btn" onmousedown="startAura()" onmouseup="stopAura()" ontouchstart="startAura()" ontouchend="stopAura()">HOLD</button>
-    <div class="meter-container">
-        <div id="meter-fill"></div>
+    <h1>Make a Wish, Adult! 🎂</h1>
+    <p>Tap the flame to blow it!</p>
+    <div class="cake-wrapper" onclick="blowCake()">
+        <span class="flame" id="flame">🔥</span>
+        <span>🎂</span>
     </div>
-    <h2 id="aura-rank" style="margin-top: 20px; color: var(--gold);"></h2>
 </div>
 
 <div class="slide" id="s4">
-    <span class="big-emoji">🎁</span>
-    <h1>A Golden Box...</h1>
-    <p style="margin-bottom: 30px;">Click to unlock your 2026 luck!</p>
-    <div style="font-size: 6rem; cursor: pointer;" onclick="unwrap()">📦</div>
+    <h1>Measuring 18yo Aura...</h1>
+    <button id="aura-btn" onmousedown="startAura()" onmouseup="stopAura()" ontouchstart="startAura()" ontouchend="stopAura()">HOLD</button>
+    <div class="meter-container"><div id="meter-fill"></div></div>
+    <h2 id="aura-rank" style="margin-top: 20px; color: var(--gold);"></h2>
 </div>
 
 <div class="slide" id="s5">
-    <h1>Dear Manuu... 👑</h1>
-    <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 20px; line-height: 1.6; text-align: left; max-height: 40vh; overflow-y: auto; border-left: 4px solid var(--gold);">
-        Happy Birthday to the most special person in my universe! <br><br>
-        I hope this year is as bright as your smile and as crazy as your energy. You deserve every single bit of happiness. Thank you for being you! <br><br>
-        Now, let's celebrate! 🥳✨❤️🫂
+    <div class="letter-content">
+🌸🎂 Happy 18th Birthday, My First Lovee My forever buddy and myy fr kuchuu puchuuu😍😍😘😘😋! 🎂🌸
+
+Finally 18! 🥳💃 You’re officially an adult now (but don’t worry, you’ll always be my little baby forever 🤡😎🙏🏻💖). You’re the most caring, supportive, and sweetest soul ever… I still wonder how I got so lucky to have you 😍✨.
+
+I miss you too too tooo muchhh 😮‍💨🥺👉👈 and honestly life feels incomplete without you by my side(ghanta.... majak h😎😎🤡🤡). But soon we’ll be together again and omg I can’t waittt! 💞 College with you is gonna be next-level fun 😍🔥. Just imagine — gaming together 🎮😎😍, shopping together 🛍️💃, cooking and messing the kitchen 🤡🫵🏻🤣, dancing till we drop 💃🎶, and wandering around the whole city hand-in-hand (agar tu sharmaye na😮&nbsp;💨)🌆🥰. Every day with you is gonna be an adventure full of love and laughter 💖✨.
+
+You’re always in my prayers 🤲💫 because you’re not just my love, you’re my happiness, my comfort, my everything 😘😘😋😋🫂🫂.
+And listen carefully😤😤 — I love you more than pani puri loves teekha pani🥵🥵 and more than momos love spicy chutney 🤡🤡🤣🤣
+
+I loveee youuu sooo soooo muchhh!!!!!!💓💝💖💝💖💕💖💖💘💖💘💝🥰🥰🥰🥰😍🥰😍🥰😍😘😘😍and no number of emojis can ever express it fully😮‍💨😮‍💨🥰🥰💓💓
+
+So today, eat cake like a queen 👑🫅🏻, smile the brightest😎😎😋😋🫵🏻🫵🏻, and feel my love wrapped around you😎😎💞💞
+
+Happy Birthday, my forever LUGAI😍😍😍😍💘💕💘💕💘💘🫶🏻🫶🏻👽👽🫡🫡😈😈🫅🏻🫅🏻🥰🥰💓💓🫵🏻🫵🏻🫶🏻🫶🏻
+
+btw I'm just counting days to give you the biggest hug🫂🫂🫂 and steal the very first birthday kiss of your adulthood 💋😍😍🥰🥰😈😈😈😍😍😍😘😘😋😋😋😆😆🤣🤣🤣💓💓💕💘💘💖💝🩷💖🩵🤍🩷🩵🤍🩷🩵🤍🩷
     </div>
-    <button class="btn-gold" style="margin-top: 25px;" onclick="startFinalRain()">CELEBRATE! 🎉</button>
+    <button class="btn-gold" onclick="startFinalRain()">CELEBRATE! 🎉</button>
 </div>
 
 <div class="slide" id="s6">
-    <h1 style="font-size: 4rem;">HBD MANUU!</h1>
-    <div style="font-size: 1.5rem; color: var(--gold); font-weight: 800;">👽👑💖✨🫂</div>
-    <div style="margin-top: 20px; font-size: 0.8rem; width: 80%; background: rgba(255,255,255,0.1); padding: 15px; border-radius: 15px; max-height: 150px; overflow: hidden;">
-        🥳🎉🎂🎊🥳🎉🎂🎊🥳🎉🎂🎊🥳🎉🎂🎊🥳🎉🎂🎊🥳🎉🎂🎊🥳🎉🎂🎊🥳🎉🎂🎊🥳🎉🎂🎊🥳🎉🎂🎊🥳🎉🎂🎊🥳🎉🎂🎊🥳🎉🎂🎊🥳🎉🎂🎊🥳🎉🎂🎊🥳🎉🎂🎊🥳🎉🎂🎊🥳🎉🎂🎊🥳🎉🎂🎊🥳🎉🎂🎊🥳🎉🎂🎊🥳🎉🎂🎊🥳🎉🎂🎊🥳🎉🎂🎊🥳🎉🎂🎊🥳🎉🎂🎊
+    <h1 style="font-size: 3.5rem;">HBD MANUU! 👑</h1>
+    <div style="font-size: 1.5rem; color: var(--gold); font-weight: 800;">👽💖🫂✨💋</div>
+    <div style="margin-top: 30px; font-size: 0.8rem; width: 85%; background: rgba(255,255,255,0.1); padding: 15px; border-radius: 15px; max-height: 100px; overflow: hidden;">
+        🥳🎉🎂🎊🥳🎉🎂🎊🥳🎉🎂🎊🥳🎉🎂🎊🥳🎉🎂🎊🥳🎉🎂🎊🥳🎉🎂🎊🥳🎉🎂🎊🥳🎉🎂🎊🥳🎉🎂🎊🥳🎉🎂🎊🥳🎉🎂🎊🥳🎉🎂🎊🥳🎉🎂🎊🥳🎉🎂🎊🥳🎉🎂🎊🥳🎉🎂🎊🥳🎉🎂🎊🥳🎉🎂🎊🥳🎉🎂🎊🥳🎉🎂🎊🥳🎉🎂🎊
     </div>
-    <h2 style="margin-top: 20px;">FOREVER & ALWAYS ❤️</h2>
+    <p style="margin-top: 25px;">I LOVE YOU INFINITY ❤️</p>
 </div>
 
 <div class="overlay" id="ov" onclick="this.style.display='none'">
@@ -143,52 +153,58 @@
         slides[cur].classList.add('active');
     }
 
+    function quizTrans(msg, nextSlide, isBack = false) {
+        slides[cur].classList.remove('active');
+        const trans = document.getElementById('s1-t');
+        document.getElementById('trans-text').innerText = msg;
+        trans.classList.add('active');
+        
+        setTimeout(() => {
+            trans.classList.remove('active');
+            if(isBack) {
+                // Return to the current question
+                slides[cur].classList.add('active');
+            } else {
+                cur = nextSlide;
+                slides[cur].classList.add('active');
+            }
+        }, 2000);
+    }
+
     function pop(t, txt) {
         document.getElementById('p-tit').innerText = t;
         document.getElementById('p-txt').innerText = txt;
         document.getElementById('ov').style.display = 'flex';
     }
 
-    // CAKE LOGIC
     function blowCake() {
         document.getElementById('flame').style.display = 'none';
-        document.getElementById('cake-body').innerText = '🎂';
         setTimeout(() => {
-            pop("WISH SENT! 🌠", "The stars have received your wish, Manuu. It's coming true!");
-            setTimeout(() => next(3), 2000);
+            pop("WISH GRANTED! 🌠", "Manuu's wishes are now universal laws.");
+            setTimeout(() => next(4), 1500);
         }, 500);
     }
 
-    // AURA METER LOGIC
-    let auraInterval;
-    let auraLevel = 0;
+    let auraInterval, auraLevel = 0;
     function startAura() {
         auraInterval = setInterval(() => {
             if(auraLevel < 100) {
                 auraLevel += 2;
                 document.getElementById('meter-fill').style.width = auraLevel + '%';
-                if(auraLevel > 30) document.getElementById('aura-rank').innerText = "Aura Level: HIGH ⚡";
-                if(auraLevel > 70) document.getElementById('aura-rank').innerText = "Aura Level: ELITE 👑";
+                if(auraLevel > 30) document.getElementById('aura-rank').innerText = "Aura: LEGAL ADULT 🔞";
+                if(auraLevel > 80) document.getElementById('aura-rank').innerText = "Aura: ELITE QUEEN 👑";
                 if(auraLevel >= 100) {
-                    document.getElementById('aura-rank').innerText = "Aura Level: INFINITE ♾️";
                     clearInterval(auraInterval);
-                    setTimeout(() => next(4), 1500);
+                    setTimeout(() => next(5), 1000);
                 }
             }
         }, 50);
     }
     function stopAura() { clearInterval(auraInterval); }
 
-    // UNWRAP LOGIC
-    function unwrap() {
-        pop("UNLOCKED! 🍀", "You've unlocked 365 days of unlimited smiles and zero bad vibes! 😼✨");
-        setTimeout(() => next(5), 2000);
-    }
-
-    // EMOJI RAIN LOGIC
     function startFinalRain() {
         next(6);
-        const emojis = ['🥳','🎉','🎂','✨','💖','👑','👽'];
+        const emojis = ['🥳','🎉','🎂','✨','💖','💋','👽'];
         setInterval(() => {
             const e = document.createElement('div');
             e.className = 'rain';
@@ -196,27 +212,22 @@
             e.style.left = Math.random() * 100 + 'vw';
             e.style.animationDuration = (Math.random()*2 + 2) + 's';
             document.body.appendChild(e);
-            setTimeout(() => e.remove(), 4000);
+            setTimeout(() => e.remove(), 3500);
         }, 150);
     }
 
-    // GALAXY STARS
+    // STARS BG
     const canvas = document.getElementById('canvas-stars');
     const ctx = canvas.getContext('2d');
     let stars = [];
     function initStars() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
         stars = [];
         for(let i=0; i<150; i++) stars.push({x:Math.random()*canvas.width, y:Math.random()*canvas.height, size:Math.random()*2, speed:Math.random()*0.5});
     }
     function drawStars() {
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        ctx.fillStyle = "white";
-        stars.forEach(s => {
-            ctx.beginPath(); ctx.arc(s.x, s.y, s.size, 0, Math.PI*2); ctx.fill();
-            s.y += s.speed; if(s.y > canvas.height) s.y = 0;
-        });
+        ctx.clearRect(0,0,canvas.width,canvas.height); ctx.fillStyle = "white";
+        stars.forEach(s => { ctx.beginPath(); ctx.arc(s.x, s.y, s.size, 0, Math.PI*2); ctx.fill(); s.y += s.speed; if(s.y > canvas.height) s.y = 0; });
         requestAnimationFrame(drawStars);
     }
     initStars(); drawStars();

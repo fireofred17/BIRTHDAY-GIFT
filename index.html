@@ -64,13 +64,13 @@
 <div class="slide active" id="s0">
     <h1 style="font-size: 4rem;">18</h1>
     <p style="margin-bottom: 20px; font-weight: bold; color: var(--gold);">LEVEL UNLOCKED: ADULTHOOD 🔓</p>
-    <button class="btn-gold" onclick="next(1)">ENTER GALAXY 🚀</button>
+    <button class="btn-gold" onclick="goToSlide('s1')">ENTER GALAXY 🚀</button>
 </div>
 
 <div class="slide" id="s1">
     <h1>Question 1 🍕</h1>
     <p style="margin-bottom: 20px;">What is your absolute favorite food?</p>
-    <button class="quiz-btn" onclick="quizTrans('hawww🙄🫢', 2)">Gol Gappe</button>
+    <button class="quiz-btn" onclick="quizTrans('hawww🙄🫢', 's2')">Gol Gappe</button>
     <button class="quiz-btn" onclick="pop('CHAL JUTHIII😏😏', 'Me > Gol Gappe. Accept it.')">The person making this project 😼</button>
 </div>
 
@@ -81,8 +81,8 @@
 <div class="slide" id="s2">
     <h1>Question 2 💼</h1>
     <p style="margin-bottom: 20px;">What is your dream job?</p>
-    <button class="quiz-btn" onclick="quizTrans('YESSS😎', 3)">ISRO Employee 🚀</button>
-    <button class="quiz-btn" onclick="quizTrans('CHALL NIKAL 🙄', 2, true)">Tujhe 2nd option chaiyee??🙃</button>
+    <button class="quiz-btn" onclick="quizTrans('YESSS😎', 's3')">ISRO Employee 🚀</button>
+    <button class="quiz-btn" onclick="quizTrans('CHALL NIKAL 🙄', 's2')">Tujhe 2nd option chaiyee??🙃</button>
 </div>
 
 <div class="slide" id="s3">
@@ -140,33 +140,20 @@ btw I'm just counting days to give you the biggest hug🫂🫂🫂 and steal the
 </div>
 
 <script>
-    let cur = 0;
-    const slides = document.querySelectorAll('.slide');
-
-    function next(n) {
+    // Universal function to switch slides safely
+    function goToSlide(slideId) {
         document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
-        cur = n;
-        if(n < 7) slides[cur].classList.add('active');
+        document.getElementById(slideId).classList.add('active');
     }
 
-    function quizTrans(msg, nextSlideNum, isBack = false) {
+    function quizTrans(msg, nextSlideId) {
         document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
         const trans = document.getElementById('s-trans');
         document.getElementById('trans-text').innerText = msg;
         trans.classList.add('active');
         
         setTimeout(() => {
-            trans.classList.remove('active');
-            if(isBack) {
-                // Returns to the specific question (s2 usually)
-                document.getElementById('s2').classList.add('active');
-                cur = 2;
-            } else {
-                cur = nextSlideNum;
-                // Since our indexing is manual, we map it:
-                const target = document.getElementById('s' + nextSlideNum);
-                target.classList.add('active');
-            }
+            goToSlide(nextSlideId);
         }, 2000);
     }
 
@@ -180,7 +167,7 @@ btw I'm just counting days to give you the biggest hug🫂🫂🫂 and steal the
         document.getElementById('flame').style.display = 'none';
         setTimeout(() => {
             pop("WISH GRANTED! 🌠", "Manuu's adulthood is now officially lucky.");
-            setTimeout(() => next(4), 1500);
+            setTimeout(() => goToSlide('s4'), 1500);
         }, 500);
     }
 
@@ -194,7 +181,7 @@ btw I'm just counting days to give you the biggest hug🫂🫂🫂 and steal the
                 if(auraLevel > 80) document.getElementById('aura-rank').innerText = "Aura: ELITE QUEEN 👑";
                 if(auraLevel >= 100) {
                     clearInterval(auraInterval);
-                    setTimeout(() => next(5), 1000);
+                    setTimeout(() => goToSlide('s5'), 1000);
                 }
             }
         }, 50);
@@ -202,7 +189,7 @@ btw I'm just counting days to give you the biggest hug🫂🫂🫂 and steal the
     function stopAura() { clearInterval(auraInterval); }
 
     function startFinalRain() {
-        next(6);
+        goToSlide('s6');
         const emojis = ['🥳','🎉','🎂','✨','💖','💋','👽'];
         setInterval(() => {
             const e = document.createElement('div');
